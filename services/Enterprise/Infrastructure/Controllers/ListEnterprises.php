@@ -23,7 +23,7 @@ class ListEnterprises
           'success' => false,
           'message' => $th -> getMessage(),
           'data' => []
-        ]);
+        ], 403);
     }
   }
 

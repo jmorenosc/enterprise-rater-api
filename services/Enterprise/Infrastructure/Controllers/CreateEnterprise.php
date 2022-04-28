@@ -21,8 +21,10 @@ class CreateEnterprise
     } catch (\Throwable $th) {
       return response()
         -> json([
-          'error' => $th -> getMessage()
-        ]);
+          'success' => false,
+          'message' => $th -> getMessage(),
+          'data' => $request -> all()
+        ], 403);
     }
   }
 
