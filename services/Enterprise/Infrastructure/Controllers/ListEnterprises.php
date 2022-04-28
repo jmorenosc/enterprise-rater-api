@@ -3,21 +3,20 @@
 namespace Services\Enterprise\Infrastructure\Controllers;
 
 use Services\Enterprise\Infrastructure\Repositories\EnterpriseEloquentRepository;
+use Services\Enterprise\Infrastructure\Requests\ListEnterprises as RequestsListEnterprises;
 
-class GetEnterprise
+class ListEnterprises
 {
 
-  public function __invoke(int $id)
+  public function __invoke(RequestsListEnterprises $request)
   {
     try {
       $repository = new EnterpriseEloquentRepository;
-      $enterprise = $repository -> getEnterprise($id);
-      return response()
-        -> json([
-          "success" => true,
-          "message" => "",
-          "data" => $enterprise
-        ], 200);
+      return $repository -> listEnterprises(
+        $request -> per_page,
+        $request->order,
+        $request -> param,
+        $request -> trashed);
     } catch (\Throwable $th) {
       return response()
         -> json([

@@ -5,8 +5,10 @@ namespace Services\Enterprise\Infrastructure\Repositories;
 use App\Models\Enterprise;
 use Services\Enterprise\Application\UseCases\{
   CreateEnterprise,
-  GetEnterprise,
-  UpdateEnterprise
+    DeleteEnterprise,
+    GetEnterprise,
+    ListEnterprises,
+    UpdateEnterprise
 };
 use Services\Enterprise\Domain\Contracts\EnterpriseContracts;
 
@@ -39,6 +41,23 @@ class EnterpriseEloquentRepository implements EnterpriseContracts
       'name' => $name
     ]);
     $use_case();
+  }
+
+  public function deleteEnterprise($id): void
+  {
+    $use_case = new DeleteEnterprise($this -> model, $id);
+    $use_case();
+  }
+
+  public function listEnterprises(?int $per_page = 50, ?string $order = 'asc', ?string $param = null, ?bool $trashed = false): object
+  {
+    $use_case = new ListEnterprises(
+      $this -> model,
+      $per_page,
+      $order,
+      $param,
+      $trashed);
+    return $use_case();
   }
 
 }

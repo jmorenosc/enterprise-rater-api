@@ -4,26 +4,26 @@ namespace Services\Enterprise\Infrastructure\Controllers;
 
 use Services\Enterprise\Infrastructure\Repositories\EnterpriseEloquentRepository;
 
-class GetEnterprise
+class DeleteEnterprise
 {
 
   public function __invoke(int $id)
   {
     try {
       $repository = new EnterpriseEloquentRepository;
-      $enterprise = $repository -> getEnterprise($id);
+      $repository -> deleteEnterprise($id);
       return response()
         -> json([
           "success" => true,
-          "message" => "",
-          "data" => $enterprise
-        ], 200);
+          "message" => "The enterprise has been deleted successfully",
+          "data" => []
+        ], 201);
     } catch (\Throwable $th) {
       return response()
         -> json([
-          'success' => false,
-          'message' => $th -> getMessage(),
-          'data' => []
+          "success" => false,
+          "message" => $th -> getMessage(),
+          "data" => []
         ]);
     }
   }

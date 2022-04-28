@@ -28,4 +28,26 @@ interface EnterpriseContracts
    */
   public function updateEnterprise(int $id, string $name):void;
 
+  /**
+   * Method to delete an enterprise
+   * The enterprise will be deleted by soft delete
+   * @method deleteEnterprise
+   * @param int $id id of enterprise to delete
+   * @return void
+   */
+  public function deleteEnterprise(int $id): void;
+
+  /**
+   * Method to list enterprises
+   * if you want list with trashed
+   * send trashed paran on true
+   * @method listEnterprises
+   * @param ?int $per_page limit of records to show default 50
+   * @param ?string $order set order asc or desc default asc
+   * @param ?string $param data to match in search default null
+   * @param ?bool $trashed data to match in search default null
+   * @return object
+   */
+  public function listEnterprises(?int $per_page = 50, ?string $order = 'asc', ?string $param = null, ?bool $trashed = false): object;
+
 }
