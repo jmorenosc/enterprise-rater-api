@@ -34,4 +34,13 @@ interface SurveyContracts
    */
   public function updateSurvey(int $id, string $name, string $description): void;
 
+  /**
+   * To delete a survey you have to send id
+   * The survey only change to deleted_at in soft deletes
+   * @method deleteSurvey
+   * @param int $id;
+   * @return void
+   */
+  public function deleteSurvey(int $id): void;
+
 }
