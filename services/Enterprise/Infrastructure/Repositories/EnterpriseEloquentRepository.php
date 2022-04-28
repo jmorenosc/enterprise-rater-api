@@ -3,8 +3,11 @@
 namespace Services\Enterprise\Infrastructure\Repositories;
 
 use App\Models\Enterprise;
-use Services\Enterprise\Application\UseCases\CreateEnterprise;
-use Services\Enterprise\Application\UseCases\GetEnterprise;
+use Services\Enterprise\Application\UseCases\{
+  CreateEnterprise,
+  GetEnterprise,
+  UpdateEnterprise
+};
 use Services\Enterprise\Domain\Contracts\EnterpriseContracts;
 
 class EnterpriseEloquentRepository implements EnterpriseContracts
@@ -28,6 +31,14 @@ class EnterpriseEloquentRepository implements EnterpriseContracts
   {
     $use_case = new GetEnterprise($this -> model, $id);
     return $use_case();
+  }
+
+  public function updateEnterprise(int $id, string $name):void
+  {
+    $use_case = new UpdateEnterprise($this -> model, $id, [
+      'name' => $name
+    ]);
+    $use_case();
   }
 
 }
