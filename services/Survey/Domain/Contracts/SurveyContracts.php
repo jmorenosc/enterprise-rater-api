@@ -24,4 +24,14 @@ interface SurveyContracts
    */
   public function getSurvey(int $id, array $relations = []): Object;
 
+  /**
+   * Update survey data
+   * @method updateSurvey
+   * @param int $id
+   * @param string $name
+   * @param string $description
+   * @return void
+   */
+  public function updateSurvey(int $id, string $name, string $description): void;
+
 }
