@@ -43,4 +43,14 @@ interface SurveyContracts
    */
   public function deleteSurvey(int $id): void;
 
+  /**
+   * Method to list surveys
+   * @method listSurveys
+   * @param int $per_page
+   * @param string $order
+   * @param ?string $param
+   * @param ?bool $trashed
+   */
+  public function listSurveys(int $per_page, string $order = 'asc', ?string $param = null, ?bool $trashed = null): Object;
+
 }

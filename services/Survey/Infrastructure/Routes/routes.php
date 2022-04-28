@@ -5,6 +5,7 @@ use Services\Survey\Infrastructure\Controllers\{
   CreateSurvey,
     DeleteSurvey,
     GetSurvey,
+    ListSurveys,
     UpdateSurvey
 };
 
@@ -13,4 +14,5 @@ Route::prefix('api/v1')->group(function(){
   Route::get('/{id}', GetSurvey::class)->name('survey.get');
   Route::put('/', UpdateSurvey::class)->name('survey.update');
   Route::delete('/{id}', DeleteSurvey::class)->name('survey.delete');
+  Route::post('list', ListSurveys::class)->name('survey.delete');
 });

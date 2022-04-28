@@ -6,6 +6,7 @@ use App\Models\Survey;
 use Services\Survey\Application\UseCases\CreateSurvey;
 use Services\Survey\Application\UseCases\DeleteSurvey;
 use Services\Survey\Application\UseCases\GetSurvey;
+use Services\Survey\Application\UseCases\ListSurveys;
 use Services\Survey\Application\UseCases\UpdateSurvey;
 use Services\Survey\Domain\Contracts\SurveyContracts;
 
@@ -43,6 +44,12 @@ class SurveyEloquentRepository implements SurveyContracts
   {
     $use_case = new DeleteSurvey($this -> model, $id);
     $use_case();
+  }
+
+  public function listSurveys(int $per_page, string $order = 'asc', ?string $param = null, ?bool $trashed = null): Object
+  {
+    $use_case = new ListSurveys($this -> model, $per_page, $order, $param, $trashed);
+    return $use_case();
   }
 
 }
