@@ -13,15 +13,22 @@ class GetEnterprise
    * @var int
    */
   private $id;
+  /**
+   * @var array
+   */
+  private $relations;
 
-  public function __construct(Object $model, int $id) {
+  public function __construct(Object $model, int $id, array $relations) {
     $this->model = $model;
     $this->id = $id;
+    $this->relations = $relations;
   }
 
   public function __invoke(): ?object
   {
-    return $this -> model -> find($this -> id);
+    $enterprise = $this -> model -> find($this -> id);
+    if (in_array('Surveys', $this -> relations)) $enterprise -> Surveys;
+    return $enterprise;
   }
 
 }

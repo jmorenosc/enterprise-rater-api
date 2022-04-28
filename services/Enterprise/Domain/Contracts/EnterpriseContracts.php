@@ -17,7 +17,7 @@ interface EnterpriseContracts
    * @param int $id id of enterprise to retriview
    * @return object instance of enterprise
    */
-  public function getEnterprise(Int $id): ?Object;
+  public function getEnterprise(Int $id, Array $relations = []): ?Object;
 
   /**
    * Method to update name of enterprise
@@ -49,5 +49,16 @@ interface EnterpriseContracts
    * @return object
    */
   public function listEnterprises(?int $per_page = 50, ?string $order = 'asc', ?string $param = null, ?bool $trashed = false): object;
+
+  /**
+   * Method to sync surveys related
+   * To sync Surveys with enterprise send in array al the surveys id
+   * The surveys does not appear in list not wil be dettached 
+   * @method syncSurveys
+   * @param object $enterprise
+   * @param array $surveys
+   * @return void
+   */
+  public function syncSurveys(Object $enterprise, Array $surveys): void;
 
 }

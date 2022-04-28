@@ -26,4 +26,9 @@ class Enterprise extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function Surveys()
+    {
+        return $this -> MorphToMany(Survey::class, 'Surveyable');
+    }
 }

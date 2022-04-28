@@ -8,6 +8,7 @@ use Services\Enterprise\Application\UseCases\{
     DeleteEnterprise,
     GetEnterprise,
     ListEnterprises,
+    SyncSurveys,
     UpdateEnterprise
 };
 use Services\Enterprise\Domain\Contracts\EnterpriseContracts;
@@ -29,9 +30,9 @@ class EnterpriseEloquentRepository implements EnterpriseContracts
     return $use_case();
   }
 
-  public function getEnterprise(Int $id): ?Enterprise
+  public function getEnterprise(Int $id, Array $relations = []): ?Enterprise
   {
-    $use_case = new GetEnterprise($this -> model, $id);
+    $use_case = new GetEnterprise($this -> model, $id, $relations);
     return $use_case();
   }
 
@@ -58,6 +59,12 @@ class EnterpriseEloquentRepository implements EnterpriseContracts
       $param,
       $trashed);
     return $use_case();
+  }
+
+  public function syncSurveys(Object $enterprise, Array $surveys): void
+  {
+    $use_case = new SyncSurveys($enterprise, $surveys);
+    $use_case();
   }
 
 }

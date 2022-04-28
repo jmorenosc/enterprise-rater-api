@@ -18,4 +18,13 @@ class Survey extends Model
         'name',
         'description'
     ];
+
+    /**
+     * Method to handle polymorphic relation
+     * @method Surveyable
+     */
+    public function Surveyable()
+    {
+        return $this -> morphTo();
+    }
 }
