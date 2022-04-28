@@ -13,5 +13,15 @@ interface SurveyContracts
    * @param string $description 
    */
   public function createSurvey(string $name, string $description): Object;
+  
+  /**
+   * Method to get survey with relations
+   * To get survey with relations send array relations
+   * @method getSurvey
+   * @param int $id
+   * @param array $relations
+   * @return object
+   */
+  public function getSurvey(int $id, array $relations = []): Object;
 
 }
