@@ -5,7 +5,7 @@ namespace Services\Enterprise\Infrastructure\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CreateEnterprise extends FormRequest
+class Enterprise extends FormRequest
 {
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
     {
@@ -34,6 +34,7 @@ class CreateEnterprise extends FormRequest
     public function rules()
     {
         return [
+            'id' => 'sometimes|int|exists:enterprises,id',
             'name' => 'required|string|min:5|max:250|unique:enterprises,name',
             'email' => 'required|string|email',
             'phone' => 'required|digits:10',

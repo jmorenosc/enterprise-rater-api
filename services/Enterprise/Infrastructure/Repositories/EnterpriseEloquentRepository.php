@@ -36,10 +36,14 @@ class EnterpriseEloquentRepository implements EnterpriseContracts
     return $use_case();
   }
 
-  public function updateEnterprise(int $id, string $name):void
+  public function updateEnterprise(Array $enterprise):void
   {
-    $use_case = new UpdateEnterprise($this -> model, $id, [
-      'name' => $name
+    $use_case = new UpdateEnterprise($this -> model, [
+      'id' => $enterprise['id'],
+      'name' => $enterprise['name'],
+      'email' => $enterprise['email'],
+      'phone' => $enterprise['phone'],
+      'rfc' => $enterprise['rfc']
     ]);
     $use_case();
   }

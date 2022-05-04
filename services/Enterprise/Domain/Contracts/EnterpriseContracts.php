@@ -8,7 +8,7 @@ interface EnterpriseContracts
   /**
    * @method createEnterprise
    * @param array $enterprise array of enterprise data {
-   * @type ?string name
+   * @type string name
    * @type string email
    * @type string phone
    * @type ?string rfc
@@ -27,11 +27,16 @@ interface EnterpriseContracts
   /**
    * Method to update name of enterprise
    * @method updateEnterprise
+   * @param array $enterprise {
    * @param int $id id of enterprise to update
    * @param string $name name to enterprise to update
+   * @param string $email email to enterprise to update
+   * @param string $phone phone to enterprise to update
+   * @param ?string $rfc rfc to enterprise to update
+   * }
    * @return object instance of enterprise
    */
-  public function updateEnterprise(int $id, string $name):void;
+  public function updateEnterprise(Array $enterprise):void;
 
   /**
    * Method to delete an enterprise

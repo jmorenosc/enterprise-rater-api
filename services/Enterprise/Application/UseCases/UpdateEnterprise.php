@@ -12,22 +12,22 @@ class UpdateEnterprise
   /**
    * @var array
    */
-  private $data;
-  /**
-   * @var int
-   */
-  private $id;
+  private $enterprise;
 
-  public function __construct(object $model, int $id, array $data) {
+  public function __construct(object $model, array $enterprise) {
     $this->model = $model;
-    $this->id = $id;
-    $this->data = $data;
+    $this->enterprise = $enterprise;
   }
 
   public function __invoke(): void
   {
-    $this -> model -> find($this -> id)
-    -> update($this -> data);
+    $this -> model -> find($this -> enterprise['id'])
+    -> update([
+      'name' => $this -> enterprise['name'],
+      'email' => $this -> enterprise['email'],
+      'phone' => $this -> enterprise['phone'],
+      'rfc' => $this -> enterprise['rfc']
+    ]);
   }
 
 }

@@ -3,18 +3,18 @@
 namespace Services\Enterprise\Infrastructure\Controllers;
 
 use Services\Enterprise\Infrastructure\Repositories\EnterpriseEloquentRepository;
-use Services\Enterprise\Infrastructure\Requests\UpdateEnterprise as RequestsUpdateEnterprise;
+use Services\Enterprise\Infrastructure\Requests\Enterprise;
 
 class UpdateEnterprise
 {
 
-  public function __invoke(RequestsUpdateEnterprise $request)
+  public function __invoke(Enterprise $request)
   {
     try {
       $repository = new EnterpriseEloquentRepository;
       $repository -> updateEnterprise(
-        $request -> id,
-        $request -> name);
+        $request -> only('id', 'name', 'email', 'phone', 'rfc')
+      );
       $enterprise = $repository -> getEnterprise($request -> id);
       return response()
         -> json([

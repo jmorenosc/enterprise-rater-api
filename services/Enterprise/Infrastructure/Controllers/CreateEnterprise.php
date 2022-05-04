@@ -3,12 +3,12 @@
 namespace Services\Enterprise\Infrastructure\Controllers;
 
 use Services\Enterprise\Infrastructure\Repositories\EnterpriseEloquentRepository;
-use Services\Enterprise\Infrastructure\Requests\CreateEnterprise as RequestsCreateEnterprise;
+use Services\Enterprise\Infrastructure\Requests\Enterprise;
 
 class CreateEnterprise
 {
 
-  public function __invoke(RequestsCreateEnterprise $request)
+  public function __invoke(Enterprise $request)
   {
     try {
       $enterprise_repository = new EnterpriseEloquentRepository;
