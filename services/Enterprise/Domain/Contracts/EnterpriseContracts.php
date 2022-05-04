@@ -7,10 +7,15 @@ interface EnterpriseContracts
 
   /**
    * @method createEnterprise
-   * @param string $name name of enterprise
+   * @param array $enterprise array of enterprise data {
+   * @type ?string name
+   * @type string email
+   * @type string phone
+   * @type ?string rfc
+   * }
    * @return object instance of enterprise
    */
-  public function createEnterprise(String $name): Object;
+  public function createEnterprise(Array $enterprise): Object;
   
   /**
    * @method getEnterprise

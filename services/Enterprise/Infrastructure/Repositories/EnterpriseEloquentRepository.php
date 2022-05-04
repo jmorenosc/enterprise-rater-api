@@ -24,9 +24,9 @@ class EnterpriseEloquentRepository implements EnterpriseContracts
     $this->model = new Enterprise;
   }
 
-  public function createEnterprise(String $name): Enterprise
+  public function createEnterprise(Array $enterprise): Enterprise
   {
-    $use_case = new CreateEnterprise($this -> model, $name);
+    $use_case = new CreateEnterprise($this -> model, $enterprise);
     return $use_case();
   }
 

@@ -15,7 +15,11 @@ class Enterprise extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name',
+        'email',
+        'phone',
+        'rfc',
+        'business_name'
     ];
     
     /**

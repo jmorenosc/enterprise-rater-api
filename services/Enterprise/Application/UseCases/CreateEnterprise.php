@@ -9,13 +9,13 @@ class CreateEnterprise
    */
   private $repository;
   /**
-   * @var string
+   * @var array
    */
-  private $name;
+  private $enterprise;
 
-  public function __construct(Object $repository, String $name) {
+  public function __construct(Object $repository, Array $enterprise) {
     $this->repository = $repository;
-    $this->name = $name;
+    $this->enterprise = $enterprise;
   }
 
   /**
@@ -23,9 +23,7 @@ class CreateEnterprise
    */
   public function __invoke():object
   {
-    $enterprise = $this -> repository -> create([
-      'name' => $this -> name
-    ]);
+    $enterprise = $this -> repository -> create($this -> enterprise);
     return $enterprise;
   }
 

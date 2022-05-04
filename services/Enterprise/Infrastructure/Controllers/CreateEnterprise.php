@@ -12,7 +12,7 @@ class CreateEnterprise
   {
     try {
       $enterprise_repository = new EnterpriseEloquentRepository;
-      $enterprise = $enterprise_repository -> createEnterprise($request -> name);
+      $enterprise = $enterprise_repository -> createEnterprise($request -> only('name', 'email', 'phone', 'rfc'));
       return response() -> json([
         'success' => true,
         'message' => 'The enterprise has been created successfully',
