@@ -35,7 +35,7 @@ class Enterprise extends FormRequest
     {
         return [
             'id' => 'sometimes|int|exists:enterprises,id',
-            'name' => 'required|string|min:5|max:250|unique:enterprises,name',
+            'name' => 'required|string|min:5|max:250|unique:enterprises,name,'.$this -> id,
             'email' => 'required|string|email',
             'phone' => 'required|digits:10',
             'rfc' => 'string|nullable|alphanum|min:12|max:13',

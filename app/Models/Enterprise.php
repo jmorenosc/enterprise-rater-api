@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Services\Enterprise\Infrastructure\Mutators\GetName;
+use Services\Enterprise\Infrastructure\Mutators\GetRFC;
 
 class Enterprise extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, GetRFC, GetName;
 
     /**
      * Data to fill on model instance
