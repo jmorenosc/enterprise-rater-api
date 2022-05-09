@@ -33,7 +33,8 @@ class ListEnterprises
   {
     return $this -> model
       -> when($this -> param, function($q){
-        $q -> where('name', 'like', "%$this->param%");
+        $q -> where('name', 'like', "%$this->param%")
+        -> orwhere('rfc', 'like', "%$this->param%");
       })
       -> when($this -> trashed, function($q){
         return $q -> withTrashed();

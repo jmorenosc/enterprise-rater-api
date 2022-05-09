@@ -13,7 +13,7 @@ class Enterprise extends FormRequest
             'success'   => false,
             'message'   => 'Validation errors',
             'data'      => $validator->errors()
-          ]));
+          ], 422));
     }
 
     /**
@@ -45,7 +45,7 @@ class Enterprise extends FormRequest
     public function messages()
     {
         return [
-            'name.*' => 'El nombre de la empresa es un dato requerido y debe contener entre 5 y 250 caracteres.'
+            'name.*' => 'El nombre de la empresa es un dato requerido y debe contener entre 5 y 250 caracteres y no debe de estar asignado a otra empresa.'
         ];
     }
 }

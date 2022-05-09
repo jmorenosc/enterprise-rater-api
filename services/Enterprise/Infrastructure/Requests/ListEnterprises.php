@@ -14,7 +14,7 @@ class ListEnterprises extends FormRequest
             'success'   => false,
             'message'   => 'Validation errors',
             'data'      => $validator->errors()
-          ]));
+          ], 422));
     }
 
     /**
@@ -35,9 +35,9 @@ class ListEnterprises extends FormRequest
     public function rules()
     {
         return [
-          'per_page' => 'present|nullable|numeric|' . Rule::in([50, 100, 200, 500]),
+          'per_page' => 'present|nullable|numeric|' . Rule::in([10, 50, 100, 200, 500]),
           'order' => 'present|nullable|string|' . Rule::in(['asc', 'desc']),
-          'param' => 'present|nullable|string|min:2|max:60',
+          'param' => 'present|nullable|string|max:60',
           'trashed' => 'present|nullable|boolean',
         ];
     }
