@@ -14,7 +14,7 @@ class CreateSurvey extends FormRequest
       'success'   => false,
       'message'   => 'Validation errors',
       'data'      => $validator->errors()
-    ]));
+    ], 422));
   }
 
   /**
@@ -36,13 +36,14 @@ class CreateSurvey extends FormRequest
   {
     return [
       'name' => 'required|string|min:5|max:250|unique:surveys,name',
-      'description' => 'required|string|min:5|max:250|unique:surveys,description',
+      'description' => 'required|string|min:5|max:250',
     ];
   }
 
   public function messages()
   {
     return [
+      'name.unique' => 'Esta encuesta ya se encuentra registrada.',
       'name.*' => 'El nombre de la encuesta es un dato requerido y debe contener entre 5 y 250 caracteres.',
       'description.*' => 'La descripción es un dato requerido y debe contener entre 20 y 500 caracteres.'
     ];

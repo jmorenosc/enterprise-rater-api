@@ -15,7 +15,7 @@ class ListSurveys extends FormRequest
       'success'   => false,
       'message'   => 'Validation errors',
       'data'      => $validator->errors()
-    ]));
+    ], 422));
   }
 
   /**
@@ -36,7 +36,7 @@ class ListSurveys extends FormRequest
   public function rules()
   {
     return [
-      'per_page' => 'present|int|' . Rule::in([50, 100, 200, 500]),
+      'per_page' => 'present|int|' . Rule::in([10, 50, 100, 200, 500]),
       'order' => 'present|string|' . Rule::in(['asc', 'desc']),
       'param' => 'present|nullable|string|min:2|max:60',
       'trashed' => 'present|nullable|boolean'

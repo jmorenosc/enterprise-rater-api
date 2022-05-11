@@ -14,7 +14,7 @@ class CreateSurvey
       $repository =  new SurveyEloquentRepository;
       return response()
        -> json([
-        'success' => false,
+        'success' => true,
         'message' => 'The survey has been created successfully',
         'data' => $repository -> createSurvey(
           $request -> name,

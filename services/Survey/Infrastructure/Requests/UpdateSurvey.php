@@ -14,7 +14,7 @@ class UpdateSurvey extends FormRequest
       'success'   => false,
       'message'   => 'Validation errors',
       'data'      => $validator->errors()
-    ]));
+    ], 422));
   }
 
   /**
@@ -36,8 +36,8 @@ class UpdateSurvey extends FormRequest
   {
     return [
       'id' => 'required|int|exists:surveys,id',
-      'name' => 'required|string|min:5|max:250|unique:surveys,name',
-      'description' => 'required|string|min:5|max:250|unique:surveys,description',
+      'name' => 'required|string|min:5|max:250|unique:surveys,name,' . $this -> id,
+      'description' => 'required|string|min:5|max:250',
       'steps' => 'present|array',
     ];
   }
@@ -46,7 +46,7 @@ class UpdateSurvey extends FormRequest
   {
     return [
       'id.*' => 'La encuesta que intentas modificar no existe.',
-      'name.*' => 'El nombre de la encuesta es un dato requerido y debe contener entre 5 y 250 caracteres.',
+      'name.*' => 'El nombre de la encuesta es un dato requerido y debe contener entre 5 y 250 caracteres y no debe de estar asignado.',
       'description.*' => 'La descripción es un dato requerido y debe contener entre 20 y 500 caracteres.',
       'steps.*' => 'Indica los pasos en que será aplicada la encuesta.'
     ];

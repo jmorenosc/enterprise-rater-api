@@ -13,7 +13,7 @@ class GetSurvey
       $repository = new SurveyEloquentRepository;
       return response()
         -> json([
-          'success' => false,
+          'success' => true,
           'message' => null,
           'data' => $repository -> getSurvey($id)
         ], 200);
