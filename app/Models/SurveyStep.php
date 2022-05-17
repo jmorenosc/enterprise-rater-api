@@ -11,6 +11,9 @@ class SurveyStep extends Model
     use HasFactory, SoftDeletes;
 
     public $timestamps = true;
+    protected $hidden = [
+        // 'pivot'
+    ];
 
     /**
      * @var array
@@ -24,11 +27,23 @@ class SurveyStep extends Model
 
     public function Parent()
     {
-        return $this -> belongsTo(SurveyStep::class);
+        return $this -> hasMany(SurveyStep::class,'has_step');
     }
     
     public function Childrens()
     {
-        return $this -> hasMany(SurveyStep::class, 'parent_id');
+        return $this -> belongsToMany(SurveyStep::class, 'has_step', 'parent_id')
+        ->withPivot(['id']);
+    }
+
+    public function Surveys()
+    {
+        return $this -> morphTo(Survey::class, 'surveyable');
+    }
+
+    public function Questions()
+    {
+        return $this -> morphToMany(Question::class, 'questionable')
+            -> withPivot(['position']);
     }
 }

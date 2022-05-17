@@ -19,9 +19,7 @@ final class UpdateSurveyStep
     $step = $this -> repository -> find($data['id']);
     $step -> update([
       'name' => $data['name'],
-      'description' => $data['description'],
-      'order' => $data['order'],
-      'parent_id' => $data['parent_id']
+      'description' => $data['description']
     ]);
     return $step;
   }

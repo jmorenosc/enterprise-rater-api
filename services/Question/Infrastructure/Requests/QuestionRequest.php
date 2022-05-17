@@ -1,11 +1,12 @@
 <?php
 
-namespace Services\Survey\Infrastructure\Requests;
+namespace Services\Question\Infrastructure\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
-class UpdateSurvey extends FormRequest
+class QuestionRequest extends FormRequest
 {
 
   protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
@@ -35,20 +36,21 @@ class UpdateSurvey extends FormRequest
   public function rules()
   {
     return [
-      'id' => 'required|int|exists:surveys,id',
-      'name' => 'required|string|min:5|max:250|unique:surveys,name,' . $this -> id,
-      'description' => 'required|string|min:5|max:250',
-      'survey_steps' => 'present|array',
+      'id' => 'sometimes|integer|exists:questions,id',
+      'title' => 'required|string|min:5|max:250',
+      'impact' => 'required|string|' . Rule::in(['none', 'low', 'moderate', 'high']),
+      'type' => 'required|string|' . Rule::in(['text', 'checkbox', 'select']),
+      'multiple' => 'required|boolean',
+      'required' => 'required|boolean',
+      'survey_steps' => 'required|array',
+      'survey_steps.*.id' => 'integer|exists:survey_steps,id',
+      'survey_steps.*.position' => 'nullable|present|integer'
     ];
   }
 
   public function messages()
   {
-    return [
-      'id.*' => 'La encuesta que intentas modificar no existe.',
-      'name.*' => 'El nombre de la encuesta es un dato requerido y debe contener entre 5 y 250 caracteres y no debe de estar asignado.',
-      'description.*' => 'La descripción es un dato requerido y debe contener entre 20 y 500 caracteres.',
-      'survey_steps.*' => 'Indica los pasos en que será aplicada la encuesta.'
-    ];
+    return [ ];
   }
+
 }

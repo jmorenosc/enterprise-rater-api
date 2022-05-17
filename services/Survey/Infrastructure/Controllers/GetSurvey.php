@@ -11,11 +11,24 @@ class GetSurvey
   {
     try {
       $repository = new SurveyEloquentRepository;
+      $survey = $repository -> getSurvey($id, ['SurveySteps' => function($q){
+        $q -> with([
+          'Childrens' => function($s){
+            $s -> orderBy('has_step.id', 'asc')
+            -> with(['Questions' => function($questions){
+              $questions -> orderby('position', 'asc');
+            }]);
+          }, 
+          'Questions' => function($q){
+            $q -> orderBy('position', 'asc');
+          }
+        ]);
+      }]);
       return response()
         -> json([
           'success' => true,
           'message' => null,
-          'data' => $repository -> getSurvey($id)
+          'data' => $survey,
         ], 200);
     } catch (\Throwable $th) {
       return response()

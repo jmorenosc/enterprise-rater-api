@@ -17,6 +17,10 @@ class UpdateSurvey
         $request -> name,
         $request -> description
       );
+      
+      $survey = $repository -> getSurvey($request -> id);
+      if (count($request -> survey_steps) > 0) $survey -> SurveySteps() -> sync($request -> survey_steps);
+      
       return response()
         -> json([
           'success' => true,

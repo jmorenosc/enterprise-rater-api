@@ -35,22 +35,21 @@ class SurveyStepRequest extends FormRequest
   public function rules()
   {
     return [
-      'id' => 'sometimes|int|exists:surveys,id',
+      'id' => 'sometimes|int|exists:survey_steps,id',
       'name' => 'required|string|min:5|max:250|unique:surveys,name,' . $this -> id,
       'description' => 'required|string|min:5|max:250',
-      'order' => 'integer|nullable',
-      'parent_id' => 'integer|nullable|exists:survey_steps,id',
+      'childrens' => 'sometimes|present|array',
+      'childrens.*' => 'integer|exists:survey_steps,id'
     ];
   }
 
   public function messages()
   {
     return [
-      'id.*' => 'La elemento que intentas modificar no existe.',
+      'id.*' => 'El elemento que intentas modificar no existe.',
       'name.*' => 'El nombre del paso es un dato requerido y debe contener entre 5 y 250 caracteres y no debe de estar asignado.',
       'description.*' => 'La descripción es un dato requerido y debe contener entre 20 y 500 caracteres.',
-      'order.*' => 'La posición de este paso debe de ser de tipo entero.',
-      'parent_id.*' => 'El paso padre debe de ser de tipo número y estar registrado en la base de datos.'
+      'childrens.*' => 'Alguno de los pasos asignados no es válido.'
     ];
   }
 

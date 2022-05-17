@@ -23,8 +23,8 @@ class Survey extends Model
      * Method to handle polymorphic relation
      * @method Surveyable
      */
-    public function Surveyable()
+    public function SurveySteps()
     {
-        return $this -> morphTo();
+        return $this -> morphedByMany(SurveyStep::class, 'surveyable');
     }
 }

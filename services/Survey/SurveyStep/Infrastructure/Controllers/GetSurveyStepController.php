@@ -11,8 +11,12 @@ class GetSurveyStepController
   {
     try {
       $repopsitory = new SurveyStepRepository;
-      return $repopsitory -> getSurveyStep($id, [ 'Childrens' ]);
-      return ['get step survey'];
+      return $repopsitory -> getSurveyStep($id, [ 
+        'Childrens' => function($q) {
+          $q -> orderBy('has_step.id', 'asc');
+        }, 
+        'Questions'
+      ]);
     } catch (\Throwable $th) {
       return response()
         -> json([

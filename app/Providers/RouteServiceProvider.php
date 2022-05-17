@@ -49,6 +49,9 @@ class RouteServiceProvider extends ServiceProvider
             Route::prefix('surveys')
                 ->namespace($this->namespace)
                 ->group(base_path('services/Survey/Infrastructure/Routes/routes.php'));
+            Route::prefix('questions')
+                ->namespace($this->namespace)
+                ->group(base_path('services/Question/Infrastructure/Routes/routes.php'));
 
             Route::middleware('web')
                 ->namespace($this->namespace)

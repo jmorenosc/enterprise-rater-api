@@ -26,8 +26,16 @@ class GetSurvey
 
   public function __invoke()
   {
-    return $this -> model
-      -> find($this -> id);
+    try {
+      $survey = $this -> model
+        ->when($this -> relations, function($q) {
+          return $q -> with($this -> relations);
+        })
+        -> find($this -> id);
+      return $survey;
+    } catch (\Throwable $th) {
+      throw new \Exception($th -> getMessage());
+    }
   }
 
 }
