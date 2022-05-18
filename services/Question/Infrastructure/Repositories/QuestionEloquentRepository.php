@@ -57,4 +57,13 @@ class QuestionEloquentRepository implements QuestionContract
       -> findOrFail($id);
   }
 
+  public function listQuestions(int $per_page = 10, ?string $param = null): object
+  {
+    return $this -> repository
+      ->when($param, function($q) use($param){
+        $q -> where('title', 'like', '%' . $param . '%');
+      })
+      ->paginate($per_page);
+  }
+
 }

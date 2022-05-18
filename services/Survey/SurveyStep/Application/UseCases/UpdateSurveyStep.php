@@ -21,7 +21,23 @@ final class UpdateSurveyStep
       'name' => $data['name'],
       'description' => $data['description']
     ]);
+    if (isset($data['childrens'])) $this -> syncChildrens($step, $data['childrens']);
+    if (isset($data['questions'])) $this -> syncQuestions($step, $data['questions']);
     return $step;
+  }
+
+  private function syncChildrens(object $step, array $childrens): void
+  {
+    $step -> Childrens() -> sync($childrens);
+  }
+
+  private function syncQuestions(object $step, array $questions): void
+  {
+    $q = [];
+    foreach ($questions as $question) {
+      $q[$question['id']] = ['position' => $question['position']];
+    }
+    $step -> Questions() -> sync($q);
   }
 
 }

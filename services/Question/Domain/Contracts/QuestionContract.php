@@ -50,4 +50,13 @@ interface QuestionContract
    */
   public function getQuestion(int $id, array $relations = []): ?Object;
 
+  /**
+   * List all questions
+   * @method listQuestions
+   * @param int $per_page
+   * @param null|string $param
+   * @return object
+   */
+  public function listQuestions(int $per_page = 10, ?string $param = null): object;
+
 }

@@ -39,7 +39,10 @@ class SurveyStepRequest extends FormRequest
       'name' => 'required|string|min:5|max:250|unique:surveys,name,' . $this -> id,
       'description' => 'required|string|min:5|max:250',
       'childrens' => 'sometimes|present|array',
-      'childrens.*' => 'integer|exists:survey_steps,id'
+      'childrens.*' => 'integer|exists:survey_steps,id',
+      'questions' => 'present|array',
+      'questions.*.id' => 'required|integer|exists:questions,id',
+      'questions.*.position' => 'present|nullable|integer',
     ];
   }
 

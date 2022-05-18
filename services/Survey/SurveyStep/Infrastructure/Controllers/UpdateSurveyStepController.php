@@ -13,11 +13,9 @@ class UpdateSurveyStepController
     try {
       $repository = new SurveyStepRepository;
       $updated = $repository 
-        -> updateSurveyStep($request -> only('id', 'name', 'description'));
+        -> updateSurveyStep($request -> only('id', 'name', 'description', 'childrens', 'questions'));
       
       $step = $repository -> getSurveyStep($request -> id);
-      
-      $step -> Childrens() -> sync($request -> childrens);
       
       return response()
         -> json([
