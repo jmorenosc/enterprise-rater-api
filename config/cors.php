@@ -4,6 +4,7 @@ return [
     'paths' => [
         'enterprises/*',
         'surveys/*',
+        'questions/*',
         'api/*', 
         'admin/api/*', 
         'sanctum/csrf-cookie'

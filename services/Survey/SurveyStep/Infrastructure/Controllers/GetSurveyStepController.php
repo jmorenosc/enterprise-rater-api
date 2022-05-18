@@ -13,9 +13,13 @@ class GetSurveyStepController
       $repopsitory = new SurveyStepRepository;
       return $repopsitory -> getSurveyStep($id, [ 
         'Childrens' => function($q) {
-          $q -> orderBy('has_step.id', 'asc');
+          $q
+            -> with(['questions']) 
+            -> orderBy('has_step.id', 'asc');
         }, 
-        'Questions'
+        'Questions' => function($q) {
+          return $q -> orderBy('position', 'asc');
+        }
       ]);
     } catch (\Throwable $th) {
       return response()
