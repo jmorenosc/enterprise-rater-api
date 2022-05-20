@@ -24,7 +24,9 @@ class CreateQuestionController
     } catch (\Throwable $th) {
       return response()
         -> json([
-          'error' => $th -> getMessage()
+          'success' => false,
+          'message' => $th -> getMessage(),
+          'data' => []
         ], 403);
     }
   }

@@ -25,4 +25,10 @@ class Question extends Model
         return $this -> morphedByMany(SurveyStep::class, 'questionable')
             -> withPivot(['position']);
     }
+
+    public function QuestionResponses()
+    {
+        return $this -> belongsToMany(QuestionResponse::class, 'question_question_responses')
+        -> withPivot([ 'position' ]);
+    }
 }

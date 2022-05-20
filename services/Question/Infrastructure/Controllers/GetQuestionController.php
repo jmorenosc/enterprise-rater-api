@@ -12,7 +12,7 @@ class GetQuestionController
     try {
       $repository = new QuestionEloquentRepository;
       return $question = $repository -> getQuestion($id, [
-        'SurveySteps' 
+        'SurveySteps', 'QuestionResponses'
       ]);
     } catch (\Throwable $th) {
       return response()
