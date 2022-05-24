@@ -44,7 +44,10 @@ class QuestionRequest extends FormRequest
       'required' => 'required|boolean',
       'survey_steps' => 'present|array',
       'survey_steps.*.id' => 'integer|exists:survey_steps,id',
-      'survey_steps.*.position' => 'nullable|present|integer'
+      'survey_steps.*.position' => 'nullable|present|integer',
+      'question_responses' => 'present|array',
+      'question_responses.*.id' => 'integer|exists:question_responses,id',
+      'question_responses.*.position' => 'nullable|present|integer'
     ];
   }
 

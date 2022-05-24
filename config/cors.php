@@ -5,6 +5,7 @@ return [
         'enterprises/*',
         'surveys/*',
         'questions/*',
+        'responses/*',
         'api/*', 
         'admin/api/*', 
         'sanctum/csrf-cookie'

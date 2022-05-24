@@ -19,7 +19,9 @@ class UpdateQuestionController
         'type',
         'multiple',
         'required',
-      ), $request -> survey_steps);
+      ), 
+      $request -> survey_steps,
+      $request -> question_responses);
       return $question;
     } catch (\Throwable $th) {
       return response()

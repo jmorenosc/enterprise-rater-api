@@ -41,7 +41,7 @@ interface QuestionContract
    * }
    * @return Object
    */
-  public function updateQuestion(array $question, array $survey_steps): Object;
+  public function updateQuestion(array $question, array $survey_steps, array $responses): Object;
 
   /**
    * Get question by id

@@ -12,7 +12,9 @@ class GetQuestionController
     try {
       $repository = new QuestionEloquentRepository;
       return $question = $repository -> getQuestion($id, [
-        'SurveySteps', 'QuestionResponses'
+        'SurveySteps', 'QuestionResponses' => function($q) {
+          $q -> orderBy('position', 'asc');
+        }
       ]);
     } catch (\Throwable $th) {
       return response()

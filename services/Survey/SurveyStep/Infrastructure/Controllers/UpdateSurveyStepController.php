@@ -2,6 +2,7 @@
 
 namespace Services\Survey\SurveyStep\Infrastructure\Controllers;
 
+use Services\Survey\Infrastructure\Repositories\SurveyEloquentRepository;
 use Services\Survey\SurveyStep\Infrastructure\Repositories\SurveyStepRepository;
 use Services\Survey\SurveyStep\Infrastructure\Requests\SurveyStepRequest;
 
@@ -15,7 +16,13 @@ class UpdateSurveyStepController
       $updated = $repository 
         -> updateSurveyStep($request -> only('id', 'name', 'description', 'childrens', 'questions'));
       
-      $step = $repository -> getSurveyStep($request -> id);
+        
+        if (isset($request -> survey_id)) {
+          $survey_repository = new SurveyEloquentRepository;
+          $survey = $survey_repository -> getSurvey($request -> survey_id);
+          $step = $repository -> getSurveyStep($request -> id);
+          $survey -> SurveySteps() -> attach($step);
+      }
       
       return response()
         -> json([

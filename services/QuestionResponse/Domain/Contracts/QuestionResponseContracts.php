@@ -26,5 +26,14 @@ interface QuestionResponseContracts
    * @param int $response['questions']['position']
    */
   public function updateResponse(array $response): object;
+
+  /**
+   * Method to list responses with pagination
+   * @method listResponses
+   * @param array $data
+   * @param int $data[per_page]
+   * @param ?string $data[param]
+   */
+  public function listResponses(array $data): Object;
   
 }

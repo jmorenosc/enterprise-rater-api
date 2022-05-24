@@ -5,11 +5,12 @@ namespace Services\QuestionResponse\Infrastructure\Repositories;
 use App\Models\QuestionResponse;
 use Services\QuestionResponse\Application\UseCases\AttachQuestions;
 use Services\QuestionResponse\Application\UseCases\CreateResponse;
+use Services\QuestionResponse\Application\UseCases\UpdateResponse;
 use Services\QuestionResponse\Domain\Contracts\QuestionResponseContracts;
 
 class QuestionResponseEloquentRepository implements QuestionResponseContracts
 {
-  use CreateResponse, AttachQuestions;
+  use CreateResponse, AttachQuestions, UpdateResponse;
 
   /**
    * @var object
@@ -20,15 +21,16 @@ class QuestionResponseEloquentRepository implements QuestionResponseContracts
     $this->model = new QuestionResponse;
   }
 
-  public function updateResponse(array $question_response): Object
+  public function listResponses(array $data): Object
   {
-    $r = $this -> model -> find($question_response['id']);
-    $r -> update([
-      'title' => $question_response['title'],
-      'value' => $question_response['value'],
-    ]);
-    $this -> attachQuestions($r, $question_response['questions']);
-    return $r;
+
+    return $this -> model 
+      -> orderBy('title', 'asc')
+      -> when($data['param'], function($q)  use($data){
+        $q -> where('title', 'like', '%' . $data['param'] . '%');
+      })
+      -> paginate($data['per_page']);
+
   }
   
 }
