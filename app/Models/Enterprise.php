@@ -37,4 +37,9 @@ class Enterprise extends Model
     {
         return $this -> MorphToMany(Survey::class, 'Surveyable');
     }
+
+    public function AppliedSurveys()
+    {
+        return $this -> hasMany(AppliedSurvey::class);
+    }
 }

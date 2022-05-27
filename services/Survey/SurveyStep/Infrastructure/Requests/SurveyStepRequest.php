@@ -44,7 +44,7 @@ class SurveyStepRequest extends FormRequest
       'questions.*.id' => 'required|integer|exists:questions,id',
       'questions.*.position' => 'present|nullable|integer',
       'survey_id' => 'present|nullable|integer|exists:surveys,id',
-      'parent_id' => 'present|nullable|integer|exists:surveys,id',
+      'parent_id' => 'present|nullable|integer|exists:survey_steps,id',
     ];
   }
 

@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use Services\Survey\Infrastructure\Controllers\{
   CreateSurvey,
     DeleteSurvey,
+    GetAppliedSurvey,
     GetSurvey,
     ListSurveys,
+    SaveAppliedSurvey,
     UpdateSurvey
 };
 
@@ -23,6 +25,8 @@ Route::prefix('api/v1')->group(function(){
   Route::put('/', UpdateSurvey::class)->name('survey.update');
   Route::delete('/{id}', DeleteSurvey::class)->name('survey.delete');
   Route::post('list', ListSurveys::class)->name('survey.delete');
+  Route::post('save-applied', SaveAppliedSurvey::class)->name('survey.applied.save');
+  Route::get('survey-applied/{id}', GetAppliedSurvey::class)->name('survey.applied.get');
 });
 
 Route::prefix('steps/api/v1')->group(function(){

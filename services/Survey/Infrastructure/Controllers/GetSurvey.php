@@ -15,12 +15,19 @@ class GetSurvey
         $q -> with([
           'Childrens' => function($s){
             $s -> orderBy('has_step.id', 'asc')
-            -> with(['Questions' => function($questions){
-              $questions -> orderby('position', 'asc');
-            }]);
+              -> with(['Questions' => function($questions){
+                $questions
+                  -> with(['QuestionResponses' => function($question_responses){
+                    $question_responses -> orderBy('question_question_responses.position', 'asc');
+                  }]) 
+                  -> orderby('position', 'asc');
+              }]);
           }, 
           'Questions' => function($q){
-            $q -> orderBy('position', 'asc');
+            $q -> with(['QuestionResponses' => function($question_responses) {
+              $question_responses -> orderBy('question_question_responses.position', 'asc');
+            }]) 
+            -> orderBy('position', 'asc');
           }
         ]);
       }]);

@@ -27,4 +27,9 @@ class Survey extends Model
     {
         return $this -> morphedByMany(SurveyStep::class, 'surveyable');
     }
+
+    public function AppliedSurveys()
+    {
+        return $this -> hasMany(AppliedSurvey::class);
+    }
 }

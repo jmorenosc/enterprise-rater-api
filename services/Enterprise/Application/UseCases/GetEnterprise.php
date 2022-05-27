@@ -26,8 +26,11 @@ class GetEnterprise
 
   public function __invoke(): ?object
   {
-    $enterprise = $this -> model -> find($this -> id);
-    if (in_array('Surveys', $this -> relations)) $enterprise -> Surveys;
+    $enterprise = $this -> model
+    -> when(count($this ->relations) > 0, function($q){
+      $q -> with($this -> relations);
+    })
+    -> find($this -> id);
     return $enterprise;
   }
 

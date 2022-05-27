@@ -37,7 +37,7 @@ class GetEnterprise extends FormRequest
         return [
           'id' => 'required|int|exists:enterprises,id',
           'relations' => 'present|array',
-          'relations.*' => 'required|string|' . Rule::in(['Surveys']),
+          'relations.*' => 'required|string|' . Rule::in(['Surveys', 'AppliedSurveys', 'AppliedSurveys.Survey']),
         ];
     }
 
